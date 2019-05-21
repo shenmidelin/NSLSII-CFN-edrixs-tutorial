@@ -1,0 +1,5 @@
+sbatch job.sh
+
+./plot_multiplets.py
+
+./plot_rixsmap.py

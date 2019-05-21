@@ -1,0 +1,27 @@
+./get_inputs.py
+
+# option 1: run each job one by one
+cd ed
+sbatch job_ed.sh
+# after it is finished
+cp eigvec.* ../xas
+cp eigvec.* ../rixs_pp
+cp eigvec.* ../rixs_ps
+
+cd ../xas
+sbatch job_xas.sh
+cd ..
+get_spectrum.py -N 1000 -ommin -20 -ommax 10 -G 2.5 -T 10 -f xas.dat xas/xas_poles*
+
+cd rixs_pp
+sbatch job_rixs.sh
+
+cd ../rixs_ps
+sbatch job_rixs.sh
+cd ..
+
+get_spectrum.py -N 1000 -ommin -0.2 -ommax 1.5 -G 0.04 -T 10 -f rixs.dat rixs_pp/rixs_poles* rixs_ps/rixs_poles*
+
+
+# option 2: run all the job in one task
+sbatch run_all_job.sh

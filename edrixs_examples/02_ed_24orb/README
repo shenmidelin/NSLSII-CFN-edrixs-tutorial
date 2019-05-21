@@ -1,0 +1,3 @@
+cp inputs/* .
+
+sbatch job.sh

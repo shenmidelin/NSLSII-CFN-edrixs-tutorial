@@ -1,0 +1,5 @@
+sbatch job.sh
+
+gnuplot> plot "xas.dat" u 1:2 w l
+gnuplot> plot "rixs_pi.dat" u 1:2 w l
+
